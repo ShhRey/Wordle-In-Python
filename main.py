@@ -1,4 +1,5 @@
 import random
+from termcolor import colored
 
 # get all words from textfile to list
 def loadWordSet(path: str):
@@ -23,6 +24,20 @@ def drawBorder(lines, size=9, pad=1):
     for line in lines:
         print("│" + space + line + space + "│")
     print(bottom_border)
+
+# Add Color/Design to Output in Terminal
+def convertWord2Color(result):
+    result_color = []
+    for letter in result:
+        if letter.in_right_position:
+            backgr = 'on_green'
+        elif letter.in_word:
+            backgr = 'on_light_yellow'
+        else:
+            backgr = "on_red"
+        colored_letter = colored(letter.character, "black", backgr)
+        result_color.append(colored_letter)
+    return " ".join(result_color)
 
 # display result (or _ _ _ _ _) on terminal
 def displayResult(wordle: Wordle):
